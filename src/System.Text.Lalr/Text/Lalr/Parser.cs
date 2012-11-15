@@ -59,7 +59,7 @@ namespace System.Text.Lalr
 
         internal struct Accessor<T>
         {
-            public T v;
+            //public T v;
             public Func<T> Get;
             public Action<T> Set;
         }

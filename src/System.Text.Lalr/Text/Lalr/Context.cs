@@ -6,6 +6,9 @@ using System.IO;
 
 namespace System.Text.Lalr
 {
+    /// <summary>
+    /// Context
+    /// </summary>
     public class Context
     {
         internal readonly SymbolCollection AllSymbols = new SymbolCollection();
@@ -13,38 +16,127 @@ namespace System.Text.Lalr
         internal readonly StateCollection AllStates = new StateCollection();
         private static readonly Action.KeyComparer _actionComparer = new Action.KeyComparer();
         private static readonly State.KeyComparer _stateComparer = new State.KeyComparer();
+        /// <summary>
+        /// Sorted
+        /// </summary>
         public State[] Sorted;
+        /// <summary>
+        /// Rule
+        /// </summary>
         public Rule Rule;
+        /// <summary>
+        /// States
+        /// </summary>
         public int States;
+        /// <summary>
+        /// Rules
+        /// </summary>
         public int Rules;
+        /// <summary>
+        /// Terminals
+        /// </summary>
         public int Terminals;
+        /// <summary>
+        /// Symbols
+        /// </summary>
         public Symbol[] Symbols;
+        /// <summary>
+        /// DataTypes
+        /// </summary>
         public Dictionary<string, int> DataTypes;
+        /// <summary>
+        /// Errors
+        /// </summary>
         public int Errors;
+        /// <summary>
+        /// ErrorSymbol
+        /// </summary>
         public Symbol ErrorSymbol;
+        /// <summary>
+        /// Wildcard
+        /// </summary>
         public Symbol Wildcard;
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name;
+        /// <summary>
+        /// ExtraArg
+        /// </summary>
         public string ExtraArg;
+        /// <summary>
+        /// TokenType
+        /// </summary>
         public string TokenType;
+        /// <summary>
+        /// DefaultDataType
+        /// </summary>
         public string DefaultDataType;
         internal string StartSymbol;
+        /// <summary>
+        /// StackSize
+        /// </summary>
         public string StackSize;
+        /// <summary>
+        /// Include
+        /// </summary>
         public string Include;
+        /// <summary>
+        /// SyntaxError
+        /// </summary>
         public string SyntaxError;
+        /// <summary>
+        /// StackOverflow
+        /// </summary>
         public string StackOverflow;
+        /// <summary>
+        /// ParseFailure
+        /// </summary>
         public string ParseFailure;
+        /// <summary>
+        /// ParseAccept
+        /// </summary>
         public string ParseAccept;
+        /// <summary>
+        /// ExtraCode
+        /// </summary>
         public string ExtraCode;
+        /// <summary>
+        /// TokenDestructor
+        /// </summary>
         public string TokenDestructor;
+        /// <summary>
+        /// DefaultDestructor
+        /// </summary>
         public string DefaultDestructor;
+        /// <summary>
+        /// InputFilePath
+        /// </summary>
         public string InputFilePath;
+        /// <summary>
+        /// TokenPrefix
+        /// </summary>
         public string TokenPrefix;
+        /// <summary>
+        /// Conflicts
+        /// </summary>
         public int Conflicts;
+        /// <summary>
+        /// HasFallback
+        /// </summary>
         public bool HasFallback;
+        /// <summary>
+        /// NoShowLinenos
+        /// </summary>
         public bool NoShowLinenos;
         internal Action<int, string, object[]> _errorCallback;
         internal Action<int, string, object[]> _warningCallback;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Context"/> class.
+        /// </summary>
+        /// <param name="errorCallback">The error callback.</param>
+        /// <param name="warningCallback">The warning callback.</param>
         public Context(Action<int, string, object[]> errorCallback, Action<int, string, object[]> warningCallback)
         {
             _errorCallback = errorCallback;
@@ -53,18 +145,37 @@ namespace System.Text.Lalr
             ErrorSymbol = Symbol.New(this, "error", false);
         }
 
+        /// <summary>
+        /// Ensures this instance.
+        /// </summary>
         public void Ensure()
         {
             if (string.IsNullOrEmpty(TokenPrefix))
                 TokenPrefix = "Token";
         }
 
+        /// <summary>
+        /// Raises the error.
+        /// </summary>
+        /// <param name="errors">The errors.</param>
+        /// <param name="lineno">The lineno.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="args">The args.</param>
         public void RaiseError(ref int errors, int lineno, string format, params object[] args) { errors++; _errorCallback(lineno, format, args); }
 
+        /// <summary>
+        /// Raises the warning.
+        /// </summary>
+        /// <param name="lineno">The lineno.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="args">The args.</param>
         public void RaiseWarning(int lineno, string format, params object[] args) { _warningCallback(lineno, format, args); }
 
         #region Process
 
+        /// <summary>
+        /// Processes this instance.
+        /// </summary>
         public void Process()
         {
             // Find the precedence for every production rule (that has one)
@@ -421,6 +532,10 @@ namespace System.Text.Lalr
 
         #endregion
 
+        /// <summary>
+        /// Reprints the specified w.
+        /// </summary>
+        /// <param name="w">The w.</param>
         public void Reprint(StreamWriter w)
         {
             w.WriteLine("// Symbols:");

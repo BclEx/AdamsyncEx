@@ -4,8 +4,14 @@ using System.Diagnostics;
 
 namespace System.Text.Lalr
 {
+    /// <summary>
+    /// Action
+    /// </summary>
     public class Action
     {
+        /// <summary>
+        /// Symbol
+        /// </summary>
         public Symbol Symbol;
         internal ActionType Type;
         internal State State;
@@ -86,6 +92,11 @@ namespace System.Text.Lalr
             return errors;
         }
 
+        /// <summary>
+        /// Computes the ID.
+        /// </summary>
+        /// <param name="ctx">The CTX.</param>
+        /// <returns></returns>
         public int ComputeID(Context ctx)
         {
             switch (Type)

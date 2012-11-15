@@ -57,9 +57,9 @@ namespace System.Text.Lalr.Emitters
             public int ERRORSYMBOL; public CodeVariableReferenceExpression pERRORSYMBOL = new CodeVariableReferenceExpression("STATES");
             //public string ERRSYMDT;
             //public bool ALLBACK;
-            public bool TRACKMAXSTACKDEPTH;
+            public bool TRACKMAXSTACKDEPTH = false;
             public int STACKDEPTH; public CodePrimitiveExpression pSTACKDEPTH;
-            public bool NDEBUG;
+            public bool NDEBUG = false;
             public bool FALLBACK;
             //
             public int ACTIONS; public CodeVariableReferenceExpression pACTIONS = new CodeVariableReferenceExpression("ACTIONS");
@@ -79,7 +79,7 @@ namespace System.Text.Lalr.Emitters
             public CodeVariableReferenceExpression pNO_ACTION = new CodeVariableReferenceExpression("NO_ACTION");
             public CodeVariableReferenceExpression pACCEPT_ACTION = new CodeVariableReferenceExpression("ACCEPT_ACTION");
             public CodeVariableReferenceExpression pERROR_ACTION = new CodeVariableReferenceExpression("ERROR_ACTION");
-            public bool NOERRORRECOVERY;
+            public bool NOERRORRECOVERY = false;
 
             public EmitContext(Context ctx, CodeTypeDeclaration target)
             {

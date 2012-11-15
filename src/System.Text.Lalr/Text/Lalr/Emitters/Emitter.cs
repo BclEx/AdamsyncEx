@@ -5,19 +5,34 @@ using System.IO;
 
 namespace System.Text.Lalr.Emitters
 {
+    /// <summary>
+    /// Emitter
+    /// </summary>
     public partial class Emitter
     {
         private Context _ctx;
         private EmitContext _emitCtx;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Emitter"/> class.
+        /// </summary>
+        /// <param name="ctx">The CTX.</param>
+        /// <param name="target">The target.</param>
         public Emitter(Context ctx, CodeTypeDeclaration target)
         {
             _ctx = ctx;
             _emitCtx = new EmitContext(ctx, target);
         }
 
-        private void AddLineInfo(CodeStatementCollection s, int sourceLineno, string source) { return; s.Add(new CodeSnippetStatement(string.Format("#line {0} \"{1}\"", sourceLineno, source))); }
+        private void AddLineInfo(CodeStatementCollection s, int sourceLineno, string source) { s.Add(new CodeSnippetStatement(string.Format("#line {0} \"{1}\"", sourceLineno, source))); }
 
+        /// <summary>
+        /// Emits the specified CTX.
+        /// </summary>
+        /// <param name="ctx">The CTX.</param>
+        /// <param name="codeNamespace">The code namespace.</param>
+        /// <param name="inputFilePath">The input file path.</param>
+        /// <returns></returns>
         public static CodeCompileUnit Emit(Context ctx, CodeNamespace codeNamespace, string inputFilePath)
         {
             var codeUnit = new CodeCompileUnit();

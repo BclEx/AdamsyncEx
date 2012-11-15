@@ -38,44 +38,50 @@ namespace System.Text.Lalr.Emitters
         /// </summary>
         public struct lookahead_action
         {
+            /// <summary>
+            /// Lookahead
+            /// </summary>
             public int Lookahead;
+            /// <summary>
+            /// Action
+            /// </summary>
             public int Action;
         }
 
         /// <summary>
-        /// 
+        /// _UsedActions
         /// </summary>
         public int _UsedActions;
         /// <summary>
-        /// 
+        /// _AllocatedActions
         /// </summary>
         public int _AllocatedActions;
         /// <summary>
-        /// 
+        /// Actions
         /// </summary>
         public lookahead_action[] Actions;
         /// <summary>
-        /// 
+        /// Lookaheads
         /// </summary>
         public lookahead_action[] Lookaheads;
         /// <summary>
-        /// 
+        /// mnLookahead
         /// </summary>
         public int mnLookahead;
         /// <summary>
-        /// 
+        /// mnAction
         /// </summary>
         public int mnAction;
         /// <summary>
-        /// 
+        /// mxLookahead
         /// </summary>
         public int mxLookahead;
         /// <summary>
-        /// 
+        /// _UsedLookaheads
         /// </summary>
         public int _UsedLookaheads;
         /// <summary>
-        /// 
+        /// _AllocatedLookaheads
         /// </summary>
         public int _AllocatedLookaheads;
 
@@ -140,6 +146,10 @@ namespace System.Text.Lalr.Emitters
             return Actions[index].Lookahead;
         }
 
+        /// <summary>
+        /// Inserts this instance.
+        /// </summary>
+        /// <returns></returns>
         public int Insert()
         {
             Debug.Assert(_UsedLookaheads > 0);
@@ -245,6 +255,15 @@ namespace System.Text.Lalr.Emitters
            **                     shifting non-terminals after a reduce.
            **  yy_default[]       Default action for each state.
            */
+        /// <summary>
+        /// Makes the specified CTX.
+        /// </summary>
+        /// <param name="ctx">The CTX.</param>
+        /// <param name="maxTokenOffset">The max token offset.</param>
+        /// <param name="minTokenOffset">The min token offset.</param>
+        /// <param name="maxNonTerminalOffset">The max non terminal offset.</param>
+        /// <param name="minNonTerminalOffset">The min non terminal offset.</param>
+        /// <returns></returns>
         public static EmitterActionTable Make(Context ctx, out int maxTokenOffset, out int minTokenOffset, out int maxNonTerminalOffset, out int minNonTerminalOffset)
         {
             /* Compute the actions on all states and count them up */
